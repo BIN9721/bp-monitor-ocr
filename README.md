@@ -11,10 +11,10 @@ trong ảnh hay không.
 
 ## Ví dụ
 
-| Thành công | Thất bại |
-|---|---|
-| ![thanh cong](docs/examples/example_success_omron.png) | ![that bai](docs/examples/example_failure_screen_not_detected.png) |
-| Khoanh đúng màn hình → đọc đúng cả 3 số, kèm confidence từng số. | Không khoanh được màn hình (do bút lấy máu che một phần khung hình) → thuật toán dừng lại, báo lỗi rõ ràng thay vì đoán bừa. |
+| Thành công (số nguyên) | Thành công (số thập phân) | Thất bại |
+|---|---|---|
+| ![thanh cong](docs/examples/example_success_omron.png) | ![thanh cong thap phan](docs/examples/example_success_decimal_sannuo.png) | ![that bai](docs/examples/example_failure_screen_not_detected.png) |
+| Khoanh đúng màn hình → đọc đúng cả 3 số, kèm confidence từng số. | Máy đo đường huyết đơn vị mmol/L (hiển thị "5.8") — nhờ `decimal_digits` trong device profile, đọc đúng **5.8**, không bị làm tròn nhầm thành số nguyên "58". | Không khoanh được màn hình (do bút lấy máu che một phần khung hình) → thuật toán dừng lại, báo lỗi rõ ràng thay vì đoán bừa. |
 
 Ảnh trên do chính `scripts/visual_report.py` sinh ra — bạn có thể tự chạy lại lệnh này
 trên ảnh của mình để xem trực quan thuật toán "nhìn thấy" gì.
