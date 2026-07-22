@@ -7,7 +7,8 @@ toán rule-based thuần túy (OpenCV) — không cần huấn luyện, không c
 **Đọc kỹ mục [Cách hoạt động & Giới hạn](#cách-hoạt-động--giới-hạn) trước khi dùng** —
 đây là thuật toán dựa trên luật cố định (không phải machine learning), thành công hay
 thất bại phụ thuộc gần như hoàn toàn vào việc có khoanh được đúng vùng màn hình LCD
-trong ảnh hay không.
+trong ảnh hay không. Muốn hiểu **chi tiết từng bước thuật toán** (dành cho người mới, có
+sơ đồ + ví dụ tính tay), xem **[ALGORITHM.md](ALGORITHM.md)**.
 
 ## Ví dụ
 
@@ -126,17 +127,11 @@ greater_than:              # danh sach (a, b): truong a phai lon hon truong b (k
   - [truong_a, truong_b]
 ```
 
-**Quy trình đo `digit_rois` cho model mới** (xem `scripts/visual_report.py` để hỗ trợ
-trực quan từng bước):
-1. Chạy `find_screen_corners` + `warp_to_frontal` trên ảnh mẫu để lấy ảnh màn hình đã
-   duỗi thẳng (kích thước = `screen_size` bạn chọn, vd 640×480).
-2. Nhìn ảnh đã warp, đọc tọa độ pixel (x, y, w, h) của từng ô chữ số.
-3. **Quan trọng:** mỗi ROI phải rộng bằng **cả ô chữ số** (như thể nó chứa số "8"), không
-   phải bounding box sát nét chữ số thực tế — đo tỷ lệ pixel theo % kích thước ô để so
-   khớp 7 đoạn, ROI bó sát sẽ làm lệch tỷ lệ và nhận nhầm chữ số (vd đọc "1" thành các số
-   khác). Số "1" trên nhiều máy dùng slot vật lý hẹp/lệch tâm hơn hẳn — cần đo riêng.
-4. Chạy `scripts/visual_report.py` để xem trực quan kết quả, chỉnh lại tọa độ nếu khung
-   màu đỏ (confidence thấp) hoặc số đọc sai.
+**Quy trình đo `digit_rois` từng bước, kèm script mẫu và cách debug khi sai:** xem
+**[docs/CALIBRATION_GUIDE.md](docs/CALIBRATION_GUIDE.md)**. Tóm tắt nhanh: quan trọng
+nhất là mỗi ROI phải rộng bằng **cả ô chữ số** (như thể nó chứa số "8"), không phải
+bounding box sát nét chữ số thực tế đang hiển thị — xem [ALGORITHM.md](ALGORITHM.md) mục
+"Bước 5" để hiểu vì sao.
 
 ## Đề xuất cải tiến: huấn luyện có giám sát nếu có dataset
 
@@ -166,6 +161,7 @@ dạng điều kiện chụp — ít hơn khó tổng quát tốt hơn rule-base
 
 ```
 bp-monitor-ocr/
+├── ALGORITHM.md                 # thuat toan + luong xu ly chi tiet, danh cho nguoi moi
 ├── app.py                       # demo Streamlit: upload anh, chon device profile, xem ket qua
 ├── api.py                       # REST API tich hop he thong khac (xem INTEGRATION.md)
 ├── Dockerfile                   # dong goi api.py thanh container
@@ -174,14 +170,16 @@ bp-monitor-ocr/
 ├── data/
 │   ├── raw/                     # anh that thu thap duoc (khong commit, xem .gitignore)
 │   └── samples/                 # anh mau de test nhanh pipeline
-├── docs/examples/                # anh minh hoa (sinh boi scripts/visual_report.py)
+├── docs/
+│   ├── CALIBRATION_GUIDE.md      # huong dan tao device profile cho model may moi, tung buoc
+│   └── examples/                 # anh minh hoa (sinh boi scripts/visual_report.py)
 ├── src/bp_ocr/
 │   ├── schema.py                  # kieu du lieu dau ra (DigitPrediction, ReadingResult...)
-│   ├── screen_detection.py        # BUOC 1: phat hien 4 goc man hinh + perspective transform
-│   ├── preprocessing.py           # grayscale, contrast, threshold, morphology
-│   ├── roi.py                     # tach tung truong + tung o chu so theo device profile
-│   ├── rule_based.py              # BUOC 2: nhan dang 7-segment bang so khop mau
-│   ├── postprocess.py             # ghep digit -> so (ho tro thap phan), kiem tra logic
+│   ├── screen_detection.py        # Buoc 1-2 (ALGORITHM.md): phat hien man hinh + warp
+│   ├── preprocessing.py           # Buoc 3: grayscale, contrast, threshold, morphology
+│   ├── roi.py                     # Buoc 4: tach tung truong + tung o chu so theo device profile
+│   ├── rule_based.py              # Buoc 5: nhan dang 7-segment bang so khop mau
+│   ├── postprocess.py             # Buoc 6: ghep digit -> so (ho tro thap phan), kiem tra logic
 │   └── pipeline.py                # orchestration toan bo pipeline (ReadingPipeline)
 ├── scripts/
 │   ├── visual_report.py           # sinh anh bao cao truc quan (anh vao tren, ket qua duoi)
