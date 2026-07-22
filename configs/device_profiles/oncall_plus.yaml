@@ -1,0 +1,13 @@
+# Device profile cho may do duong huyet On-Call Plus - toa do do tu anh mau thuc te
+# (data/samples), tinh theo pixel tren anh da warp ve chinh dien (screen_size 400x300).
+name: oncall_plus
+screen_size: [400, 300]
+invert: true              # chu so toi tren nen LCD sang
+
+fields:
+  glucose:
+    digit_rois:
+      - [45, 94, 90, 147]
+      - [156, 94, 97, 147]
+      - [280, 94, 95, 147]
+    valid_range: [20, 600]   # gioi han ky thuat hop ly cua may do duong huyet dien tu

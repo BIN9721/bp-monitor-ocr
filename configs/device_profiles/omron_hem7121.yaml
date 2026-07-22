@@ -1,0 +1,34 @@
+# Device profile cho Omron HEM-7121 - toa do tinh theo pixel tren anh da warp ve chinh dien
+# (screen_size 640x480), do tay tu contour cua anh mau thuc te (data/samples).
+#
+# Quan trong: moi digit_roi phai la kich thuoc CA O (nhu the no chua chu so "8"), khong
+# phai bounding box sat chu so thuc te. Vi du chu so "1" chi chiem hai net doc ben phai
+# nhung roi van phai rong bang o "8" thi rule_based.py (SEGMENT_REGIONS ty le theo % o)
+# moi do dung vi tri cac net. Neu ROI bo sat theo net "1" (hep), ty le % se lech va
+# nhan dang sai (da kiem chung thuc te: chia deu / bo sat gay sai SYS=226, DIA=18...).
+name: omron_hem7121
+screen_size: [640, 480]
+invert: true              # chu so toi tren nen LCD sang
+
+fields:
+  sys:
+    digit_rois:
+      - [14, 62, 175, 163]
+      - [207, 62, 175, 163]
+      - [400, 62, 175, 163]
+    valid_range: [60, 260]   # gioi han ky thuat, khong phai gioi han y te
+  dia:
+    digit_rois:
+      - [27, 224, 175, 161]
+      - [220, 224, 172, 161]
+      - [410, 224, 175, 161]
+    valid_range: [30, 150]
+  pulse:
+    digit_rois:
+      - [237, 382, 112, 103]
+      - [367, 382, 112, 103]
+      - [478, 382, 111, 103]
+    valid_range: [30, 220]
+
+greater_than:
+  - [sys, dia]   # SYS phai lon hon DIA

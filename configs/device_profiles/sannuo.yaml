@@ -1,0 +1,15 @@
+# Device profile cho may do duong huyet SANNUO - toa do do tu anh mau thuc te
+# (data/samples/images.jpeg), tinh theo pixel tren anh da warp ve chinh dien.
+# Hien thi don vi mmol/L (so thap phan, vd "5.8") - dung decimal_digits de giu dung
+# gia tri, khong lam tron thanh so nguyen "58".
+name: sannuo
+screen_size: [640, 480]
+invert: true
+
+fields:
+  glucose:
+    digit_rois:
+      - [270, 165, 140, 225]
+      - [430, 165, 140, 225]
+    decimal_digits: 1
+    valid_range: [1.0, 33.0]   # gioi han ky thuat hop ly theo don vi mmol/L

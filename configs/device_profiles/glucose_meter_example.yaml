@@ -1,0 +1,14 @@
+# Vi du device profile cho MAY DO DUONG HUYET - minh hoa schema tong quat khong gioi
+# han o may do huyet ap: chi khai bao 1 truong "glucose", khong co greater_than.
+# Toa do la vi du minh hoa, CAN do lai theo anh da warp thuc te truoc khi dung that.
+name: glucose_meter_example
+screen_size: [400, 300]
+invert: false
+
+fields:
+  glucose:
+    digit_rois:
+      - [80, 80, 70, 120]
+      - [160, 80, 70, 120]
+      - [240, 80, 70, 120]
+    valid_range: [20, 600]   # gioi han ky thuat hop ly cua may do duong huyet dien tu

@@ -1,0 +1,15 @@
+# Device profile cho may do duong huyet Medisign MM1100 - toa do do tu anh mau thuc te
+# (data/samples/images (5).jpeg), tinh theo pixel tren anh da warp ve chinh dien.
+# Luu y: anh nguon do phan giai thap (225x225, vung LCD chi ~73x72px) nen phong to 640x480
+# gay meo/rang cua vien anh - digit_rois duoc do thu cong tren luoi toa do, tranh vung vien.
+name: medisign_mm1100
+screen_size: [640, 480]
+invert: true
+
+fields:
+  glucose:
+    digit_rois:
+      - [95, 75, 150, 230]
+      - [220, 75, 170, 230]
+      - [390, 75, 180, 230]
+    valid_range: [20, 600]

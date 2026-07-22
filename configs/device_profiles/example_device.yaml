@@ -1,0 +1,38 @@
+# Device profile mau cho MAY DO HUYET AP - toa do tinh theo pixel tren anh da warp ve
+# chinh dien. Sao chep file nay cho tung model may va chinh lai toa do thuc te.
+#
+# Schema nay dung chung cho BAT KY loai may do nao hien thi so 7-net (huyet ap, duong
+# huyet, nhiet do...) - "fields" co the khai bao bao nhieu truong tuy y, khong bat buoc
+# phai la sys/dia/pulse. Xem configs/device_profiles/glucose_meter_example.yaml de biet
+# vi du thiet bi chi co 1 truong.
+#
+# Luu y: digit_rois la ROI rieng cho tung o chu so (khong phai 1 ROI field roi chia deu),
+# vi tren nhieu may thuc te khoang cach giua cac chu so khong deu nhau
+# (xem configs/device_profiles/omron_hem7121.yaml de biet vi du thuc te, do tu anh that).
+name: example_device
+screen_size: [640, 480]   # [width, height] cua anh sau khi warp_to_frontal
+invert: false             # true neu chu so sang tren nen toi
+min_confidence: 0.6       # nguong confidence toi thieu de chap nhan mot truong (khong bat buoc, mac dinh 0.6)
+
+fields:
+  sys:
+    digit_rois:
+      - [40, 40, 66, 100]
+      - [106, 40, 66, 100]
+      - [172, 40, 68, 100]
+    valid_range: [60, 260]  # gioi han ky thuat hop ly (khong bat buoc khai bao)
+  dia:
+    digit_rois:
+      - [40, 180, 66, 100]
+      - [106, 180, 66, 100]
+      - [172, 180, 68, 100]
+    valid_range: [30, 150]
+  pulse:
+    digit_rois:
+      - [400, 260, 66, 100]
+      - [466, 260, 66, 100]
+      - [532, 260, 68, 100]
+    valid_range: [30, 220]
+
+greater_than:               # danh sach (a, b): truong a phai lon hon truong b (khong bat buoc)
+  - [sys, dia]

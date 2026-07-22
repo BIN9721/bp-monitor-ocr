@@ -1,0 +1,13 @@
+# Device profile cho may do duong huyet ACCU-CHEK Active - toa do do tu anh mau thuc te
+# (data/samples/images (7).jpeg), tinh theo pixel tren anh da warp ve chinh dien.
+name: accuchek_active
+screen_size: [640, 480]
+invert: true
+
+fields:
+  glucose:
+    digit_rois:
+      - [32, 100, 175, 238]
+      - [218, 101, 197, 237]
+      - [429, 98, 194, 239]
+    valid_range: [20, 600]

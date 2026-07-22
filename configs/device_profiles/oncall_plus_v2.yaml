@@ -1,0 +1,14 @@
+# Device profile cho may do duong huyet On Call Plus (bien the mmol/L) - toa do do tu
+# anh mau thuc te (data/samples/images (4).jpeg), tinh theo pixel tren anh da warp ve
+# chinh dien. Khac voi oncall_plus.yaml (bien the mg/dL, so nguyen "135").
+name: oncall_plus_v2
+screen_size: [640, 480]
+invert: true
+
+fields:
+  glucose:
+    digit_rois:
+      - [240, 125, 155, 235]
+      - [430, 120, 165, 235]
+    decimal_digits: 1
+    valid_range: [1.0, 33.0]

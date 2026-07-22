@@ -1,0 +1,13 @@
+# Device profile cho may do duong huyet VivaChek Ino - toa do do tu anh mau thuc te
+# (data/samples/images (6).jpeg), tinh theo pixel tren anh da warp ve chinh dien.
+name: vivachek_ino
+screen_size: [640, 480]
+invert: true
+
+fields:
+  glucose:
+    digit_rois:
+      - [15, 132, 175, 228]
+      - [229, 132, 173, 228]
+      - [452, 132, 176, 225]
+    valid_range: [20, 600]
