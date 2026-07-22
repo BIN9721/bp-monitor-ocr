@@ -3,3 +3,8 @@ opencv-python>=4.9
 PyYAML>=6.0
 pytest>=8.0
 streamlit>=1.38
+
+# cho api.py (REST API tich hop) - bo qua neu chi dung thu vien Python truc tiep hoac CLI
+fastapi>=0.110
+uvicorn>=0.29
+python-multipart>=0.0.9

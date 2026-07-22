@@ -93,7 +93,17 @@ streamlit run app.py
 
 # 5. Danh gia hang loat theo nhan co san (xem --help de biet dinh dang labels.json)
 python scripts/evaluate.py --images data/raw --labels data/raw/labels.json --device-profile configs/device_profiles/omron_hem7121.yaml
+
+# 6. REST API (goi tu he thong khac qua HTTP, bat ky ngon ngu nao)
+uvicorn api:app --host 0.0.0.0 --port 8000
 ```
+
+## Tích hợp vào hệ thống khác
+
+Xem **[INTEGRATION.md](INTEGRATION.md)** — hướng dẫn đầy đủ 3 cách tích hợp (thư viện
+Python / CLI / REST API qua `api.py`), hợp đồng đầu vào-đầu ra, cách xử lý lỗi, và lưu ý
+vận hành quan trọng (tỷ lệ phát hiện màn hình thực tế, không phải thiết bị y tế đã kiểm
+định). Có kèm `Dockerfile` để đóng gói `api.py` thành container.
 
 ### Thêm một loại máy đo mới
 
@@ -157,6 +167,9 @@ dạng điều kiện chụp — ít hơn khó tổng quát tốt hơn rule-base
 ```
 bp-monitor-ocr/
 ├── app.py                       # demo Streamlit: upload anh, chon device profile, xem ket qua
+├── api.py                       # REST API tich hop he thong khac (xem INTEGRATION.md)
+├── Dockerfile                   # dong goi api.py thanh container
+├── INTEGRATION.md               # huong dan tich hop: thu vien / CLI / REST API
 ├── configs/device_profiles/     # ten truong, ROI tung o chu so, gioi han hop le theo tung model may
 ├── data/
 │   ├── raw/                     # anh that thu thap duoc (khong commit, xem .gitignore)
